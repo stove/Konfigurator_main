@@ -1,0 +1,262 @@
+/* -------------------------------- 
+Main 
+-------------------------------- */
+.cd-nav-trigger {
+  position: absolute;
+  display: inline-block;
+  top: 15px;
+  right: 15px;
+  height: 44px;
+  width: 44px;
+  z-index: 5;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+.cd-nav-trigger .cd-icon {
+  /* icon created in CSS */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  transform: translateX(-50%) translateY(-50%);
+  display: inline-block;
+  width: 18px;
+  height: 3px;
+  background-color: #ffffff;
+  z-index: 6;
+}
+.cd-nav-trigger .cd-icon::before, .cd-nav-trigger .cd-icon:after {
+  /* upper and lower lines of the menu icon */
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  /* Force Hardware Acceleration in WebKit */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /* apply transition to transform property */
+  -moz-transform: 0.3s;
+  -ms-transform: 0.3s;
+  -o-transform: 0.3s;
+  -webkit-transform: 0.3s;
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger .cd-icon::before {
+  transform: rotate(0deg);
+  transform: translateY(-6px);
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger .cd-icon::after {
+  transform: rotate(0deg);
+  transform: translateY(6px);
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger::before, .cd-nav-trigger::after {
+  /* 2 rounded colored backgrounds for the menu icon */
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  /* Force Hardware Acceleration in WebKit */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition-property: transform;
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger::before {
+  background-color: #409fff;
+  transform: scale(1);
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-delay: 0.4s;
+  -ms-transition-delay: 0.4s;
+  -o-transition-delay: 0.4s;
+  -webkit-transition-delay: 0.4s;
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger::after {
+  background-color: #409fff;
+  transform: scale(0);
+  transform: scale(0);
+  -moz-transition-delay: 0;
+  -ms-transition-delay: 0;
+  -o-transition-delay: 0;
+  -webkit-transition-delay: 0;
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger.close-nav::before {
+  /* user clicks on the .cd-nav-trigger element - 1st rounded background disappears */
+  transform: scale(0);
+  box-sizing: border-box;
+}
+.cd-nav-trigger.close-nav::after {
+  /* user clicks on the .cd-nav-trigger element - 2nd rounded background appears */
+  transform: scale(1);
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-delay: 0.4s;
+  -ms-transition-delay: 0.4s;
+  -o-transition-delay: 0.4s;
+  -webkit-transition-delay: 0.4s;
+  box-sizing: border-box;
+  content: "";
+}
+
+.cd-nav-trigger.close-nav .cd-icon {
+  /* user clicks on the .cd-nav-trigger element - transform the icon */
+  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0);
+}
+.cd-nav-trigger.close-nav .cd-icon::before, .cd-nav-trigger.close-nav .cd-icon::after {
+  background-color: white;
+  box-sizing: border-box;
+  content: "";
+}
+.cd-nav-trigger.close-nav .cd-icon::before {
+  transform: translateY(0);
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+.cd-nav-trigger.close-nav .cd-icon::after {
+  transform: translateY(0);
+  transform: rotate(-45deg);
+  box-sizing: border-box;
+  content: "";
+}
+
+ul.cd-primary-nav {
+  list-style: none;
+  padding: 80px 0 0 0;
+  margin: 0;
+  /* by default it's hidden */
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  padding: 80px 5%;
+  z-index: 4;
+  background-color: #fff;
+  overflow: auto;
+  /* this fixes the buggy scrolling on webkit browsers - mobile devices only - when overflow property is applied */
+  -webkit-overflow-scrolling: touch;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s;
+}
+
+.cd-primary-nav li {
+  margin: 1em 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.cd-primary-nav a {
+  font-size: 18px;
+  font-size: 1.125rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color 0.2s;
+  color: #777;
+}
+
+.no-touch .cd-primary-nav a:hover {
+  color: #0073e5;
+}
+
+.cd-primary-nav.fade-in {
+  /* navigation visible at the end of the circle animation */
+  visibility: visible;
+  opacity: 1;
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-primary-nav li {
+    margin: 2em 0;
+  }
+
+  .cd-primary-nav a {
+    font-size: 21px;
+    font-size: 1.3125rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .cd-primary-nav li {
+    margin: 2.6em 0;
+  }
+
+  .cd-primary-nav a {
+    font-size: 24px;
+    font-size: 1.5rem;
+  }
+}
+.cd-overlay-nav,
+.cd-overlay-content {
+  /* containers of the 2 main rounded backgrounds - these containers are used to position the rounded bgs behind the menu icon */
+  position: fixed;
+  top: 18px;
+  right: 5%;
+  height: 4px;
+  width: 4px;
+  transform: translateX(-20px) translateY(20px);
+}
+
+.cd-overlay-nav span,
+.cd-overlay-content span {
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  /* Force Hardware Acceleration in WebKit */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  transform-origin: 50% 50%;
+  transform: scale(0);
+}
+
+.cd-overlay-nav.is-hidden,
+.cd-overlay-content.is-hidden {
+  /* background fades out at the end of the animation */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+
+.cd-overlay-nav {
+  /* main rounded colored bg 1 */
+  z-index: 3;
+}
+
+.cd-overlay-nav span {
+  background-color: #0073e5;
+}
+
+.cd-overlay-content {
+  /* main rounded colored bg 2 */
+  z-index: 4;
+}
+
+.cd-overlay-content span {
+  background-color: #0073e5;
+}
+
